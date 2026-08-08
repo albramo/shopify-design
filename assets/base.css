@@ -2210,3 +2210,78 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
   }
 }
+
+/* ============================================================================
+   🎨 PALETTE: DELIGHTFUL UX & CUSTOM DESIGN SYSTEM ALIGNMENT
+   - Main Colors: White (#ffffff), Black (#000000), Light Gray (#DFDFDF)
+   - Accent Buttons & Interactive Highlights: Light Blue (#38bdf8)
+   ============================================================================ */
+
+/* 1. Global Custom Theme Variables Overrides */
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-border: #DFDFDF;
+  --color-primary-button-background: #38bdf8;
+  --color-primary-button-text: #000000;
+  --color-primary-button-border: #38bdf8;
+  --color-primary-button-hover-background: #0ea5e9;
+  --color-primary-button-hover-text: #ffffff;
+  --color-primary-button-hover-border: #0ea5e9;
+}
+
+/* 2. Premium & High-Contrast Announcement Bar Styling (PC & Mobile) */
+.announcement-bar {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  border-block-end: 1px solid #DFDFDF !important;
+}
+
+.announcement-bar__text,
+.announcement-bar__text a {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.announcement-bar__text a:hover {
+  text-decoration: underline;
+}
+
+/* 3. Refined Header & Layout Organization (PC & Mobile) */
+.header__row--top {
+  border-bottom: 1px solid #DFDFDF !important;
+}
+
+/* Smooth Navigation & Action Hover Transition Effects */
+.menu-list__link,
+.header-actions__action {
+  transition: color 0.2s ease-out, transform 0.2s ease-out !important;
+}
+
+.menu-list__link:hover,
+.header-actions__action:hover {
+  color: #38bdf8 !important;
+}
+
+/* 4. Hero Slideshow & Slide Controls Interactive Polish */
+.slideshow-control {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease !important;
+}
+
+.slideshow-control:hover:not([disabled]) {
+  transform: scale(1.15);
+  color: #38bdf8 !important;
+}
+
+/* Pagination Dots scaling and styling for active slide feedback */
+.slideshow-controls__dots button::after {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease !important;
+}
+
+.slideshow-controls__dots button[aria-selected="true"]::after {
+  transform: scale(1.35);
+  background-color: #38bdf8 !important;
+}
