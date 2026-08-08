@@ -2285,3 +2285,86 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   transform: scale(1.35);
   background-color: #38bdf8 !important;
 }
+
+/* 5. Ultra-Premium & Luxurious Hero Slider / Slideshow Enhancements */
+
+/* Modern Backdrop Gradient Overlay to elevate text readability & premium feel */
+.slide__image-container::after,
+.hero__media-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  ) !important;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Slow, silky-smooth zoom transition for hero/slider media */
+.slide__image-container img,
+.slide__image-container video,
+.hero__media-grid img,
+.hero__media-grid video {
+  transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.slideshow-slide:hover .slide__image-container img,
+.slideshow-slide:hover .slide__image-container video,
+.hero:hover .hero__media-grid img,
+.hero:hover .hero__media-grid video {
+  transform: scale(1.04);
+}
+
+/* Elegant fade-up slide text and button animations for high-end luxury feel */
+.slide__content .group-block-content,
+.hero__content-wrapper .group-block-content {
+  animation: luxury-fade-up 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+@keyframes luxury-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sleek button interactions with light-blue theme glow */
+.button,
+.button-custom {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.button:hover,
+.button-custom:hover {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6) !important;
+  transform: translateY(-2px);
+}
+
+/* Perfect mobile responsiveness & centered alignment for clean, modern mobile screens */
+@media screen and (max-width: 749px) {
+  .slide__content,
+  .hero__content-wrapper {
+    padding: var(--padding-lg) !important;
+    text-align: center;
+  }
+
+  .slide__content .group-block-content,
+  .hero__content-wrapper .group-block-content {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .slide__content h1, .slide__content h2, .slide__content h3,
+  .hero__content-wrapper h1, .hero__content-wrapper h2, .hero__content-wrapper h3 {
+    text-align: center !important;
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+  }
+}
