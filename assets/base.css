@@ -2214,7 +2214,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 /* ============================================================================
    🎨 PALETTE: DELIGHTFUL UX & CUSTOM DESIGN SYSTEM ALIGNMENT
    - Main Colors: White (#ffffff), Black (#000000), Light Gray (#DFDFDF)
-   - Accent Buttons & Interactive Highlights: Light Blue (#38bdf8)
+   - Button Hover Accent: Milky Beige (لبني) (#ECE2CF)
    ============================================================================ */
 
 /* 1. Global Custom Theme Variables Overrides */
@@ -2222,12 +2222,12 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   --color-background: #ffffff;
   --color-foreground: #000000;
   --color-border: #DFDFDF;
-  --color-primary-button-background: #38bdf8;
-  --color-primary-button-text: #000000;
-  --color-primary-button-border: #38bdf8;
-  --color-primary-button-hover-background: #0ea5e9;
-  --color-primary-button-hover-text: #ffffff;
-  --color-primary-button-hover-border: #0ea5e9;
+  --color-primary-button-background: #000000;
+  --color-primary-button-text: #ffffff;
+  --color-primary-button-border: #000000;
+  --color-primary-button-hover-background: #ECE2CF;
+  --color-primary-button-hover-text: #000000;
+  --color-primary-button-hover-border: #ECE2CF;
 }
 
 /* 2. Premium & High-Contrast Announcement Bar Styling (PC & Mobile) */
@@ -2235,19 +2235,23 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   background-color: #000000 !important;
   color: #ffffff !important;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  border-block-end: 1px solid #DFDFDF !important;
+  letter-spacing: 0.15em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
 .announcement-bar__text,
 .announcement-bar__text a {
   color: #ffffff !important;
   text-decoration: none;
+  transition: opacity 0.2s ease-out;
 }
 
 .announcement-bar__text a:hover {
+  opacity: 0.8;
   text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* 3. Refined Header & Layout Organization (PC & Mobile) */
@@ -2258,12 +2262,21 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 /* Smooth Navigation & Action Hover Transition Effects */
 .menu-list__link,
 .header-actions__action {
-  transition: color 0.2s ease-out, transform 0.2s ease-out !important;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out !important;
 }
 
 .menu-list__link:hover,
+.menu-list__link[aria-expanded='true'] {
+  color: #000000 !important;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #000000;
+}
+
 .header-actions__action:hover {
-  color: #38bdf8 !important;
+  color: #000000 !important;
+  opacity: 0.7;
 }
 
 /* 4. Hero Slideshow & Slide Controls Interactive Polish */
@@ -2273,7 +2286,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
 .slideshow-control:hover:not([disabled]) {
   transform: scale(1.15);
-  color: #38bdf8 !important;
+  color: #000000 !important;
 }
 
 /* Pagination Dots scaling and styling for active slide feedback */
@@ -2283,7 +2296,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
 .slideshow-controls__dots button[aria-selected="true"]::after {
   transform: scale(1.35);
-  background-color: #38bdf8 !important;
+  background-color: #000000 !important;
 }
 
 /* 5. Ultra-Premium & Luxurious Hero Slider / Slideshow Enhancements */
@@ -2336,7 +2349,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   }
 }
 
-/* Sleek button interactions with light-blue theme glow */
+/* Sleek button interactions with subtle black shadow lift */
 .button,
 .button-custom {
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
@@ -2344,7 +2357,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
 .button:hover,
 .button-custom:hover {
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
   transform: translateY(-2px);
 }
 

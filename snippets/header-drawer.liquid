@@ -70,27 +70,31 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
-    <div
-      ref="menuDrawer"
-      class="
-        menu-drawer
-        {% if block_settings.background_color != blank or block_settings.text_color != blank %}
-          color-custom-{{ block.id }}
-        {% endif %}
-      "
-    >
-      <button
-        class="button close-button menu-drawer__close-button focus-inset"
-        type="button"
-        aria-label="{{ 'actions.close' | t }}"
-        on:click="/close"
+      <div
+        ref="menuDrawer"
+        class="
+          menu-drawer
+          {% if block_settings.background_color != blank or block_settings.text_color != blank %}
+            color-custom-{{ block.id }}
+          {% endif %}
+        "
       >
-        <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-          {{- 'icon-close.svg' | inline_asset_content -}}
-        </span>
-      </button>
-      <nav
-        class="menu-drawer__navigation"
+        <div class="menu-drawer__header">
+          {%- if settings.logo != blank -%}
+            <span class="menu-drawer__logo">
+              {{- settings.logo | image_url: width: 400 | image_tag:
+                class: 'menu-drawer__logo-image',
+                widths: '200, 400',
+                loading: 'eager',
+                alt: shop.name | escape
+              -}}
+            </span>
+          {%- else -%}
+            <span class="menu-drawer__title">{{ shop.name | escape }}</span>
+          {%- endif -%}
+        </div>
+        <nav
+          class="menu-drawer__navigation"
         style="
           {%- render 'menu-font-styles', settings: block_settings, menu_type: 'drawer' %}
           {%- render 'submenu-font-styles', settings: block_settings %}
@@ -764,6 +768,16 @@
         </div>
       {% endif %}
     </div>
+    <button
+      class="button close-button menu-drawer__close-button menu-drawer__close-button--fixed focus-inset"
+      type="button"
+      aria-label="{{ 'actions.close' | t }}"
+      on:click="/close"
+    >
+      <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </button>
     <div
       class="menu-drawer__backdrop"
       on:click="header-drawer/close"
@@ -772,6 +786,12 @@
 </header-drawer>
 
 {% stylesheet %}
+  /* Menu button + icon */
+  .menu-drawer-container {
+    --drawer-animation-speed: 0.3s;
+    --drawer-slide-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
   .header__icon--menu {
     position: initial;
   }
@@ -782,12 +802,39 @@
     justify-content: center;
     align-items: center;
     padding: var(--padding-lg);
+    transition: transform 0.2s var(--ease-out-cubic), color 0.2s ease;
+
+    @media (hover: hover) {
+      &:hover {
+        transform: scale(1.08);
+      }
+
+      &:active {
+        transform: scale(0.94);
+      }
+    }
   }
 
   .header__icon--summary .header-drawer-icon {
     margin: auto;
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  /* Hamburger → X icon swap animation */
+  details.menu-open .header__icon--menu .header-drawer-icon--close {
+    animation: menu-drawer-icon-in 0.25s var(--ease-out-cubic);
+  }
+
+  @keyframes menu-drawer-icon-in {
+    from {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
   }
 
   .menu-drawer__featured-content {
@@ -885,7 +932,8 @@
     left: 0;
     width: 100vw;
     height: 100dvh;
-    backdrop-filter: brightness(0.75);
+    backdrop-filter: brightness(0.55) blur(2px);
+    -webkit-backdrop-filter: brightness(0.55) blur(2px);
     z-index: var(--layer-overlay);
     opacity: 0;
     transition: opacity var(--drawer-animation-speed) ease;
@@ -897,8 +945,8 @@
 
   .menu-drawer,
   details[open] > .menu-drawer__submenu {
-    transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease,
-      opacity var(--drawer-animation-speed) ease;
+    transition: transform var(--drawer-animation-speed) var(--drawer-slide-ease),
+      visibility var(--drawer-animation-speed) ease, opacity var(--drawer-animation-speed) ease;
   }
 
   .menu-open > .menu-drawer,
@@ -1022,8 +1070,8 @@
   }
 
   .menu-drawer-container[open] .menu-drawer__animated-element {
-    animation: menu-drawer-nav-open var(--drawer-animation-speed) ease-in-out;
-    animation-delay: calc(var(--drawer-animation-speed) + (var(--menu-drawer-animation-index) - 1) * 0.1s);
+    animation: menu-drawer-nav-open var(--drawer-animation-speed) cubic-bezier(0.22, 1, 0.36, 1);
+    animation-delay: calc(var(--drawer-animation-speed) + (var(--menu-drawer-animation-index) - 1) * 0.06s);
     animation-fill-mode: backwards;
   }
 
@@ -1161,13 +1209,82 @@
   }
 
   .menu-drawer__close-button {
+    --private-button-size: 36px;
+
     position: relative;
     right: auto;
     top: auto;
-    width: fit-content;
-    height: fit-content;
+    width: var(--private-button-size);
+    height: var(--private-button-size);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
     color: inherit;
-    padding: var(--padding-lg);
+    box-shadow: none;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.25s var(--ease-out-cubic);
+
+    &:hover {
+      background-color: rgb(var(--color-foreground-rgb) / 0.06);
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Floating close button: sits outside the drawer panel, at the top-right
+     edge of the screen, above the backdrop. Visible only while the drawer is open. */
+  .menu-drawer__close-button--fixed {
+    position: fixed;
+    top: calc(var(--padding-sm) + 4px);
+    right: var(--padding-sm);
+    z-index: calc(var(--layer-menu-drawer) + 2);
+    display: none;
+
+    .menu-open & {
+      display: flex;
+      animation: menu-drawer-icon-in 0.25s var(--ease-out-cubic);
+    }
+  }
+
+  .menu-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-md);
+    padding: var(--padding-sm) var(--drawer-padding);
+    border-block-end: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    position: sticky;
+    top: 0;
+    z-index: var(--layer-flat);
+    flex-shrink: 0;
+  }
+
+  .menu-drawer__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.125rem;
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .menu-drawer__logo {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .menu-drawer__logo-image {
+    max-height: 32px;
+    width: auto;
+    object-fit: contain;
   }
 
   .menu-drawer__back-button {
@@ -1285,13 +1402,17 @@
     0% {
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-0.5rem);
+      transform: translateY(14px);
+    }
+
+    60% {
+      transform: translateY(-3px);
     }
 
     100% {
       visibility: visible;
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 
@@ -1420,5 +1541,40 @@
 
   .drawer-localization .language-selector .svg-wrapper.icon-caret svg {
     transform: none;
+  }
+
+  /* Modern menu item display */
+  .menu-drawer__menu > .menu-drawer__list-item {
+    min-height: calc(2 * var(--padding-lg) + var(--icon-size-md));
+  }
+
+  .menu-drawer__menu-item--mainlist,
+  .menu-drawer__menu-item--parent {
+    padding-block: var(--padding-md);
+  }
+
+  .menu-drawer__menu-item {
+    transition: padding-inline-start 0.2s var(--ease-out-cubic), color 0.2s ease;
+  }
+
+  .menu-drawer__menu-item--mainlist:hover .menu-drawer__menu-item-text,
+  .menu-drawer__menu-item--parent:hover .menu-drawer__menu-item-text {
+    padding-inline-start: 4px;
+  }
+
+  .menu-drawer__menu-item--active .menu-drawer__menu-item-text {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-foreground);
+  }
+
+  .menu-drawer__menu-item--child {
+    padding-block: var(--padding-2xs);
+  }
+
+  .menu-drawer__utility-links {
+    border-block-start: 1px solid var(--color-border);
+    padding-block-start: var(--padding-lg);
   }
 {% endstylesheet %}

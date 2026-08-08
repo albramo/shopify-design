@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "logo_height": 36,
@@ -45,9 +54,9 @@
     "badge_sold_out_background_color": "#eef1ea",
     "badge_sold_out_text_color": "{{ settings.color_palette.foreground }}",
     "badge_text_transform": "none",
-    "palette_primary_button_background": "#38bdf8",
-    "palette_primary_button_text": "#000000",
-    "palette_primary_button_border": "#38bdf8",
+    "palette_primary_button_background": "#000000",
+    "palette_primary_button_text": "#ffffff",
+    "palette_primary_button_border": "#000000",
     "primary_button_border_width": 0,
     "button_border_radius_primary": 14,
     "palette_secondary_button_background": "rgba(0,0,0,0)",
@@ -147,9 +156,9 @@
       "badge_sold_out_background_color": "#eef1ea",
       "badge_sold_out_text_color": "{{ settings.color_palette.foreground }}",
       "badge_text_transform": "none",
-      "palette_primary_button_background": "#38bdf8",
-      "palette_primary_button_text": "#000000",
-      "palette_primary_button_border": "#38bdf8",
+      "palette_primary_button_background": "#000000",
+      "palette_primary_button_text": "#ffffff",
+      "palette_primary_button_border": "#000000",
       "primary_button_border_width": 0,
       "button_border_radius_primary": 14,
       "palette_secondary_button_background": "rgba(0,0,0,0)",

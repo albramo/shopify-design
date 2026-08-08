@@ -203,4 +203,32 @@
       translate: 0px var(--atc-destination, 0px);
     }
   }
+
+  .add-to-cart__spinner {
+    display: none;
+    width: 1.1em;
+    height: 1.1em;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: add-to-cart-spinner 0.7s linear infinite;
+  }
+
+  .add-to-cart-button.is-loading .add-to-cart__spinner {
+    display: inline-block;
+  }
+
+  .add-to-cart-button.is-loading .add-to-cart-text {
+    display: none;
+  }
+
+  .add-to-cart-button.is-loading .add-to-cart-icon {
+    display: none;
+  }
+
+  @keyframes add-to-cart-spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 {% endstylesheet %}
