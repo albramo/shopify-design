@@ -2,7 +2,6 @@ class HeroSlider extends HTMLElement {
   #currentIndex = 0;
   #slideCount = 0;
   #autoplayTimer = null;
-  #progressTimer = null;
   #isPlaying = false;
 
   constructor() {
@@ -19,7 +18,6 @@ class HeroSlider extends HTMLElement {
 
   #init() {
     this.slides = this.querySelectorAll('[data-slide-index]');
-    this.contents = this.querySelectorAll('[data-content-index]');
     this.dots = this.querySelectorAll('[data-dot]');
     this.prevBtn = this.querySelector('[data-prev]');
     this.nextBtn = this.querySelector('[data-next]');
@@ -92,17 +90,13 @@ class HeroSlider extends HTMLElement {
 
     const currentSlide = this.slides[this.#currentIndex];
     const nextSlide = this.slides[index];
-    const currentContent = this.contents[this.#currentIndex];
-    const nextContent = this.contents[index];
     const currentDot = this.dots[this.#currentIndex];
     const nextDot = this.dots[index];
 
     currentSlide?.classList.remove('is-active');
-    currentContent?.classList.remove('is-active');
     currentDot?.classList.remove('is-active');
 
     nextSlide?.classList.add('is-active');
-    nextContent?.classList.add('is-active');
     nextDot?.classList.add('is-active');
 
     this.#currentIndex = index;
