@@ -14,8 +14,6 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "subtitle": "وصل حديثاً",
-            "heading": "السلايد الأول",
             "description": "استكشف أحدث تشكيلاتنا ذات التصميم المميز والجودة العالية.",
             "button_label": "تسوق الآن",
             "button_link": "shopify://collections/all"
@@ -24,8 +22,6 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "subtitle": "عروض خاصة",
-            "heading": "السلايد الثاني",
             "description": "احصل على أفضل المنتجات بأسعار استثنائية لفترة محدودة.",
             "button_label": "عرض التشكيلة",
             "button_link": "shopify://collections/all"

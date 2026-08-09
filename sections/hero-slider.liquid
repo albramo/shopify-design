@@ -36,14 +36,6 @@
           </div>
 
           <div class="hero-slider__content">
-            {% if block.settings.subtitle != blank %}
-              <span class="hero-slider__subtitle">{{ block.settings.subtitle }}</span>
-            {% endif %}
-
-            {% if block.settings.heading != blank %}
-              <h2 class="hero-slider__heading">{{ block.settings.heading }}</h2>
-            {% endif %}
-
             {% if block.settings.description != blank %}
               <p class="hero-slider__description">{{ block.settings.description }}</p>
             {% endif %}
@@ -449,18 +441,6 @@
           "label": "صورة السلايد (Slide Image)"
         },
         {
-          "type": "text",
-          "id": "subtitle",
-          "label": "العنوان الفرعي (Subtitle)",
-          "default": "تشكيلة جديدة"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "العنوان الرئيسي (Heading)",
-          "default": "اكتشف أحدث تصاميمنا"
-        },
-        {
           "type": "textarea",
           "id": "description",
           "label": "وصف السلايد (Description)",
@@ -506,8 +486,6 @@
         {
           "type": "slide",
           "settings": {
-            "subtitle": "وصل حديثاً",
-            "heading": "تشكيلة الربيع 2026",
             "description": "اكتشف أحدث صيحات الموضة والمنتجات الأكثر مبيعاً.",
             "button_label": "تصفح التشكيلة"
           }
@@ -515,8 +493,6 @@
         {
           "type": "slide",
           "settings": {
-            "subtitle": "الأكثر مبيعاً",
-            "heading": "منتجات مميزة",
             "description": "استكشف المجموعات المفضل لدى عملائنا بخصومات حصرياً.",
             "button_label": "عرض المنتجات"
           }
