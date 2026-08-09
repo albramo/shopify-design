@@ -39,24 +39,44 @@ class HeroSlider extends HTMLElement {
       });
     });
 
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    this.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    // Touch & Pointer Drag Swipe Support (Mobile & Desktop)
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
 
-    this.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diffX = touchStartX - touchEndX;
-      if (Math.abs(diffX) > 40) {
+    const handleStart = (e) => {
+      const touch = e.touches ? e.touches[0] : e;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      isDragging = true;
+    };
+
+    const handleEnd = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const touch = e.changedTouches ? e.changedTouches[0] : e;
+      const diffX = startX - touch.clientX;
+      const diffY = startY - touch.clientY;
+
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
         if (diffX > 0) {
           this.#next();
         } else {
           this.#prev();
         }
       }
-    }, { passive: true });
+    };
+
+    this.addEventListener('touchstart', handleStart, { passive: true });
+    this.addEventListener('touchend', handleEnd, { passive: true });
+
+    this.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse') handleStart(e);
+    });
+
+    this.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'mouse') handleEnd(e);
+    });
 
     // Shopify Theme Editor support
     document.addEventListener('shopify:block:select', (event) => {

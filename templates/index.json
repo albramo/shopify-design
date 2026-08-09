@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hero_slider_main": {
       "type": "hero-slider",
@@ -35,6 +36,15 @@
       "settings": {
         "autoplay": true,
         "autoplay_speed": 5
+      }
+    },
+    "shop_by_category_main": {
+      "type": "shop-by-category",
+      "settings": {
+        "title": "Shop by Category",
+        "section_width": "page-width",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "product_list_fa6P9H": {
@@ -154,7 +164,7 @@
               "settings": {
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -165,7 +175,7 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 4,
+                "padding-block-start": 8,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -181,7 +191,7 @@
                 "show_tax_info": false,
                 "type_preset": "h6",
                 "width": "100%",
-                "alignment": "left",
+                "alignment": "center",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -226,6 +236,7 @@
   },
   "order": [
     "hero_slider_main",
+    "shop_by_category_main",
     "product_list_fa6P9H"
   ]
 }

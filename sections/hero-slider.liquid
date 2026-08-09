@@ -59,48 +59,37 @@
     </div>
 
     {% if section.blocks.size > 1 %}
+      <button
+        type="button"
+        class="hero-slider__arrow hero-slider__arrow--prev"
+        data-prev
+        aria-label="{{ 'accessibility.previous' | t }}"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="hero-slider__arrow hero-slider__arrow--next"
+        data-next
+        aria-label="{{ 'accessibility.next' | t }}"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
       <div class="hero-slider__navigation">
         <div class="hero-slider__progress">
           <div class="hero-slider__progress-bar" data-progress></div>
-        </div>
-        <div class="hero-slider__arrows">
-          <button
-            type="button"
-            class="hero-slider__arrow hero-slider__arrow--prev"
-            data-prev
-            aria-label="{{ 'accessibility.previous' | t }}"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button
-            type="button"
-            class="hero-slider__arrow hero-slider__arrow--next"
-            data-next
-            aria-label="{{ 'accessibility.next' | t }}"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
         </div>
         <div class="hero-slider__counter">
           <span data-current>1</span>
           <span class="hero-slider__counter-divider">/</span>
           <span data-total>{{ section.blocks.size }}</span>
         </div>
-      </div>
-
-      <div class="hero-slider__dots">
-        {% for block in section.blocks %}
-          <button
-            type="button"
-            class="hero-slider__dot{% if forloop.first %} is-active{% endif %}"
-            data-dot="{{ forloop.index0 }}"
-            aria-label="Slide {{ forloop.index }}"
-          ></button>
-        {% endfor %}
       </div>
     {% endif %}
   </div>
@@ -158,9 +147,9 @@
       visibility: hidden;
       transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
       align-items: flex-end;
-      justify-content: flex-start;
-      padding: var(--padding-xl) max(var(--page-margin), 5vw);
-      padding-bottom: 80px;
+      justify-content: center;
+      padding: var(--padding-xl);
+      padding-bottom: 45px;
       padding-block-start: calc(var(--header-group-height, 0px) + var(--padding-xl));
     }
 
@@ -236,13 +225,13 @@
 
   @media screen and (min-width: 750px) {
     .hero-slider__content {
-      margin: 0;
+      margin: 0 auto;
       padding: 0;
       background: transparent;
       box-shadow: none;
       border: none;
-      text-align: left;
-      align-items: flex-start;
+      text-align: center;
+      align-items: center;
     }
   }
 
@@ -293,6 +282,8 @@
 
   @media screen and (min-width: 750px) {
     .hero-slider__description {
+      text-align: center;
+      margin-inline: auto;
       color: rgb(255 255 255 / 0.95);
       text-shadow: 0 1px 10px rgb(0 0 0 / 0.5);
     }
@@ -333,27 +324,7 @@
   }
 
   .hero-slider__navigation {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: var(--gap-lg);
-    padding: var(--padding-md) var(--padding-lg);
-    margin: 0 var(--page-margin);
-    margin-bottom: var(--padding-lg);
-    background: rgb(var(--color-background));
-    border-radius: var(--style-border-radius-lg);
-    box-shadow: 0 4px 20px rgb(0 0 0 / 0.08);
-  }
-
-  @media screen and (min-width: 750px) {
-    .hero-slider__navigation {
-      position: absolute;
-      bottom: var(--padding-xl);
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-    }
+    display: none !important;
   }
 
   .hero-slider__progress {
@@ -372,24 +343,59 @@
     transition: width 0.3s ease;
   }
 
-  .hero-slider__arrows {
-    display: flex;
-    gap: var(--gap-xs);
-  }
-
   .hero-slider__arrow {
+    position: absolute;
+    top: 24svh;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background: transparent;
-    border: 1px solid rgb(var(--color-foreground-rgb) / 0.15);
-    border-radius: 50%;
-    color: var(--color-foreground);
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .hero-slider__arrow--prev {
+    left: 12px;
+  }
+
+  .hero-slider__arrow--next {
+    right: 12px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-slider__arrow {
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-slider__arrow--prev {
+      left: max(var(--page-margin), 24px);
+    }
+
+    .hero-slider__arrow--next {
+      right: max(var(--page-margin), 24px);
+    }
+
+    .hero-slider__arrow:hover {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+      transform: translateY(-50%) scale(1.1);
+    }
   }
 
   .hero-slider__arrow:hover {
@@ -398,8 +404,8 @@
   }
 
   .hero-slider__arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 
   .hero-slider__counter {

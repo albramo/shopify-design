@@ -1338,10 +1338,10 @@ product-price.text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) .volume-pricing-note {
 }
 
 .compare-at-price {
-  color: rgb(var(--color-rgb, var(--color-foreground-rgb)) / var(--opacity-subdued-text));
+  color: #dc2626;
   text-decoration-line: line-through;
   text-decoration-thickness: 1.5px;
-  text-decoration-color: rgb(var(--color-rgb, var(--color-foreground-rgb)) / var(--opacity-30));
+  text-decoration-color: rgba(220, 38, 38, 0.4);
 }
 
 .price-item__group {
