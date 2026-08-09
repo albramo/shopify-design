@@ -209,7 +209,7 @@
   .hero-slider__content-wrapper {
     position: relative;
     z-index: 3;
-    margin-top: -40px;
+    margin-top: 16px;
     padding: 0 var(--page-margin);
     padding-bottom: var(--padding-2xl);
   }
@@ -236,6 +236,12 @@
     background: rgb(var(--color-background));
     border-radius: var(--style-border-radius-lg);
     box-shadow: 0 10px 40px rgb(0 0 0 / 0.08), 0 2px 12px rgb(0 0 0 / 0.05);
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-slider__content {
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25), 0 2px 12px rgba(255, 255, 255, 0.15);
+    }
   }
 
   @media screen and (min-width: 750px) {
